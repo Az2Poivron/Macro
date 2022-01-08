@@ -5,7 +5,7 @@
 
 ##Launching and playing with the program
 - Edit the parameters in the top of integration.py for customize your simulation
-- Start integration.py and enjoy.
+- Start integration.py by launching him from his folder to avoid path issue.
 
 ##Making your own map
 I highly recommand to use paint.net for this one 
