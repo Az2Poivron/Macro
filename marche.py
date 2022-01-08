@@ -1,6 +1,6 @@
 import random
 
-#fonction de gros bg en O(N+M)
+#Somme trié de 2 liste trié O(N+M)
 def fusion2D(L1,L2,i = 2):
     if L1==[] or L2==[]:
         return(L1+L2)
@@ -70,6 +70,7 @@ def gen_intersection(A,B):
     return(L)
 
 #Redondance de code mais pas trouvé mieux
+#Cas particulier traité, ne pas regarder
 def ligne_droite(A,B):
     L=[]
     L_inter = gen_intersection(A,B)
@@ -101,7 +102,7 @@ def ligne_droite(A,B):
 
     return(L)
         
-
+#Dit si 2 Point sont connecté entre eux , gère le cas des doubles chemin pour les lignes droites
 def is_connect(A,B,tab, wall =-1):
     trajets = gen_trajet(A,B)
     R = []
@@ -113,8 +114,8 @@ def is_connect(A,B,tab, wall =-1):
         R.append(statut)
     return(statut)
 
+#génère la liste des cases rencontrée de A à B, mixte étrange entre hardcodage et astuce, ne pas chercher à comprendre
 def gen_trajet(A,B):
-
     if (A[0] == B[0] == int(A[0])) or (A[1] == B[1] == int(A[1])):
         return(ligne_droite(A,B))
 
@@ -140,25 +141,12 @@ def gen_trajet(A,B):
                 x += sx
             elif marker =='y':
                 y += sy
-            elif marker == 'xy':
+            elif marker == 'xy': #gestion des diagonales ou le trajet passe exactement entre 4 case de tableau d'un coup
                 add = [[x+sx,y] , [x,y+sy]]
-                random.shuffle(add)
+                random.shuffle(add) #pas de jaloux
                 L += add
                 x += sx
                 y += sy
                 skip = True
             L.append([x,y])
     return([L])
-        
-
-"""
-TO DO LIST
-
-Faire la marche
-    prendre le signe
-    prendre soit meme (petit detail a regarder coordonnée pile)
-    pour chaque point 
-        si x avancer de sx en x
-        sinon avancer de sy en y 
-        renvoyer liste des cases
-"""

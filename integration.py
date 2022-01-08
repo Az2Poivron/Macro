@@ -14,18 +14,21 @@ v = 0.8
 coef_color = 1
 
 #facteur de multiplicationd de la fenetre 
-screen_size = 10
+screen_size = 5
 
 #nb d'image par seconde
-FPS = 10
+FPS = 15
 
-#file_name = "metro1"
-file_name = "laby4"
-file_name = "comparatif3"
-#file_name = "monstrueux1"
+file_name = "metro1"
+#file_name = "metro2"
+#file_name = "laby"
+#file_name = "comparatif_obstacle"
+#file_name = "comparatif_tunnel"
 #file_name = "dedale"
 #file_name = "demo"
 #file_name = "uniform2"
+#file_name = "uniform1"
+
 
 def random_walk(tab,a,b,d):
 	L = [[-1,0] ,[1,0] ,[0,-1] ,[0,1]]
@@ -82,10 +85,9 @@ def etape(tab_densite,tab_vitesse,tab_vide,where_sortie):
 	return(tab)
 
 
-#ça draw , c'est pas du tout opti mais pour le moment on va faire avec
+#Procédure d'affichage
 def draw(tab,where_sortie,display,screen):
 	display.fill((0,0,0))
-	
 	for i in range(tab.shape[0]):
 		for j in range(tab.shape[1]):
 			pos = (i,tab.shape[1] -j-1)
@@ -105,9 +107,6 @@ def draw(tab,where_sortie,display,screen):
 
 #Initialisation Des tableaux utilisé
 tab_densite = csv2tab(file_name)
-sortie = [1,1] #Trouver toutes les sorties
-
-
 tab_angle = get_angle(tab_densite,file_name=file_name,auto_caching=True) #Faire des dingueries avec Djikstra tout ça
 tab_vitesse = angle_to_vitesse(v , tab_angle)
 tab_vide = gen_mur(tab_densite)
@@ -120,14 +119,12 @@ display = pygame.Surface((tab_densite.shape[0],tab_densite.shape[1]))
 clock = pygame.time.Clock()
 running = True
 
-#la boucle est bouclé, tu connais
+#affichage de l'étape 0 et petite latence le temps que la fenetre apparaisse bien sur l'écran
 draw(tab_densite,where_sortie,display,screen)
 time.sleep(0.5)
 
-tour = 0
-N = 10
+#main loop
 while running:
-	tour += 1
 	clock.tick(FPS)
 	#INPUT
 	for event in pygame.event.get():
