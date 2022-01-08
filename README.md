@@ -1,7 +1,7 @@
 # Macro
 
 ## Requierement
-- requieres Pygame2.0 (1.x probably works too)
+- requieres [Pygame2.0]( https://pypi.org/project/pygame/ )(1.x probably works too)
 
 ## Launching and playing with the program
 - Edit the parameters in the top of integration.py for customize your simulation
