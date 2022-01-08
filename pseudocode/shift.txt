@@ -1,0 +1,25 @@
+NAME : shift
+GOAL : transform the current position to an easier one to process with
+INPUT : x : int
+        y : int
+        vx : float between -1 and 1
+        vy : float between -1 and 1
+
+OUTPUT: x : int
+        y : int
+        vx : float between 0 and 1
+        vy : float between 0 and 1
+ 
+
+START
+    IF vx < 0
+        x <- x - 1
+        vx <- 1 + vx
+    
+    IF vy < 0
+        y <- y - 1
+        vy <- vy + 1
+
+    RETURN x ,y ,vx ,vy
+
+END

@@ -1,0 +1,33 @@
+NAME : random_walk
+GOAL : making a random walk on the board to distribute density
+INPUT : density_array : Array[n_row, n_column] containing float between 0 and 1, 
+        wall_array : Array[n_row, n_column] containing boolean
+        i : int
+        j : int
+        density : float between 0 and 1
+
+OUTPUT : density_array : Array[n_row, n_column] containing float between 0 and 1, 
+
+START
+    WHILE density > 0
+        
+        // Drop off if it's possible
+        available <- 1 - density_array[i,j]
+        IF available > 0 AND NOT wall_array[i,j] 
+            stored_density <- min(available,density)
+            density <- density - stored_density
+            density_array[i,j] <- density_array[i,j] + stored_density
+        ENDIF
+
+        //Pick new coordonate
+        possibilities <- []
+        FOR each adjacente coord of [i,j]
+            IF they fit on the array shapes AND are not wall
+                add it to possibilities
+            ENDIF
+        ENDFOR
+        i,j <- random pick from possibilities
+
+    ENDWHILE
+    return density_array
+END

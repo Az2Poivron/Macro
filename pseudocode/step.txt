@@ -1,0 +1,44 @@
+NAME : step
+GOAL : Run the simulation for one iteration
+
+INPUT : density_array : Array[n_row, n_column] containing float between 0 and 1, 
+        speed_array : Array[n_row, n_column] containing 2D Vector with float coordonate between -1 and 1
+        wall_array : Array[n_row, n_column] containing boolean
+        exit_list : list containing 2D int coordonate 
+        epsilon = 1e-10 : float 
+
+OUTPUT : new_array : Array[n_row, n_column] containing float between 0 and 1, 
+
+START
+    new_array <- Array[dimx, dimy] containing 0.
+    FOR each row on density_array
+        FOR each column on density_array
+            d <- density_array[row,column]
+            IF d > epsilon
+                x,y <- row, column
+                vx, vy <- speed_array[row,column]
+                x,y,vx,vy <- shift(x,y,vx,y)
+                
+                dico <- {[x,y] : (1-vx)*(1-vy),
+                        [x+1,y] : vx*(1-vy),
+                        [x,y+1] : (1-vx)*vy,
+                        [x+1,y+1] : vx*vy}
+            
+                FOR each coord in dico
+                    i,j <- coord
+                    partial_density <- dico[coord] * d
+                    new_array <- random_walk(new_array,wall_array,i,j,partial_density)
+                ENDFOR
+            ENDIF
+        ENDFOR
+    ENDFOR
+
+    //resetting exit
+    FOR each coord in exit_list
+        new_array[coord] <- 0
+    ENFOR
+END
+
+
+
+
