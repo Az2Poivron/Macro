@@ -2,30 +2,27 @@ import numpy as np
 from graph import gen_graph, plus_proche
 from marche import is_connect
 
-
+#retire toute la densité du tableau
 def gen_mur(tab):
     tab = tab.copy()
     tab[np.where(tab != -1)] = 0
     return(tab)
 
+#Regarde si les angles n'ont pas déja été calculé et stocké, sinon lance la fonction pour le faire
 def get_angle(tab,file_name=None, auto_caching= False):
-
     if auto_caching :
         try: #si deja en stock
             tab =np.genfromtxt(f"cache_angle/{file_name}.csv")
             return(tab)
         except:
             pass
-    
     angle_deg = angle(tab)
     angle_rad = angle_to_radian(angle_deg) 
-    
     if file_name != None and auto_caching:
         np.savetxt(f"cache_angle/{file_name}.csv" , angle_rad)
-
-
     return(angle_rad)
 
+#se passe d'explication
 def angle_to_radian(tab):
     return(tab*np.pi/180)
 
@@ -53,9 +50,10 @@ def afficher(tab):
         for y in x:
             print(" "*(y>=0) + f"{y:0.2f}",end=" ")
         print("")
+
+
 #tableau 3D , sortie => tableau d'angle en deg , sortie est en 3D
 def angle(tableau):
-
     graph = gen_graph(tableau)
     tab=np.zeros((len(tableau),len(tableau[0])))
     for i in range(len(tableau)):
@@ -70,7 +68,7 @@ def angle(tableau):
     return(tab)
 
 
-#Donne l'angle d'un point vers la sortie
+#Donne l'angle d'un point vers la sortie + gestion de cas que Arctan ne couvre pas
 def droite_to_angle(point,sortie): #Convertisseur angle
     dx=sortie[0]-point[0]
     dy=sortie[1]-point[1]
@@ -86,7 +84,7 @@ def droite_to_angle(point,sortie): #Convertisseur angle
         signe=(dy/np.abs(dy))
         teta = signe * 90
     
-    else: #sortie Arbitrairement 720 mais aucune importance
+    else: #sortie Arbitrairement 30 mais aucune importance
         teta=30 #Sur la sortie
     return(teta)
 
@@ -98,7 +96,7 @@ def angle_to_vitesse(v,teta_ij , epsilon = 10**-15):
     c[np.where(np.abs(c) < epsilon)] = 0
     return(np.array([v*c,v*s]))
     
-#renvoye un tableau
+#calcul le signe d'un tableau, utile car Numpy vectorise
 def signe(tab): 
     n = tab.copy()
     n[np.where(tab<0)] = -1
