@@ -8,7 +8,7 @@ from tools import angle_to_vitesse, get_angle , signe, gen_mur
 from converter import csv2tab
 
 #vitesse entre 0 et 1 
-v = 0.1
+v = 0.8
 
 #vitesse de diminution de la couleur en fonction de la densité
 coef_color = 1
@@ -21,12 +21,11 @@ FPS = 10
 
 #file_name = "metro1"
 file_name = "laby4"
+file_name = "comparatif3"
 #file_name = "monstrueux1"
 #file_name = "dedale"
 #file_name = "demo"
 #file_name = "uniform2"
-
-
 
 def random_walk(tab,a,b,d):
 	L = [[-1,0] ,[1,0] ,[0,-1] ,[0,1]]
