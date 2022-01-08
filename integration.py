@@ -122,7 +122,7 @@ running = True
 #affichage de l'étape 0 et petite latence le temps que la fenetre apparaisse bien sur l'écran
 draw(tab_densite,where_sortie,display,screen)
 time.sleep(0.5)
-
+ 
 #main loop
 while running:
 	clock.tick(FPS)
