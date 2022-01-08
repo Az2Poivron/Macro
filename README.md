@@ -3,11 +3,11 @@
 ## Requierement
 - requieres Pygame2.0 (1.x probably works too)
 
-##Launching and playing with the program
+## Launching and playing with the program
 - Edit the parameters in the top of integration.py for customize your simulation
 - Start integration.py by launching him from his folder to avoid path issue.
 
-##Making your own map
+## Making your own map
 I highly recommand to use paint.net for this one 
 - RED (255,0,0) are for wall
 - GREEN (0,255,0) are for exit
