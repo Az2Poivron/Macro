@@ -27,4 +27,4 @@ def csv2tab(name):
             new[i,j] = tab[a-1-j,i]
     return(new)
 
-image2csv("uniform2")
+image2csv("djikstra")

@@ -19,6 +19,7 @@ screen_size = 5
 #nb d'image par seconde
 FPS = 15
 
+
 file_name = "metro1"
 #file_name = "metro2"
 #file_name = "laby"
@@ -28,7 +29,7 @@ file_name = "metro1"
 #file_name = "demo"
 #file_name = "uniform2"
 #file_name = "uniform1"
-
+#file_name = "djikstra"
 
 def random_walk(tab,a,b,d):
 	L = [[-1,0] ,[1,0] ,[0,-1] ,[0,1]]
